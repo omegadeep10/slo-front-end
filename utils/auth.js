@@ -37,7 +37,7 @@ export function logout() {
 export function requireAuth(to, from, next) {
     if (!isLoggedIn()) {
         next({
-            path: '/',
+            path: '/login',
             query: { redirect: to.fullPath }
         });
     } else {
@@ -48,6 +48,13 @@ export function requireAuth(to, from, next) {
 export function isLoggedIn() {
   const token = localStorage.getItem(ID_TOKEN_KEY);
   return !!token && !isTokenExpired(token);
+}
+
+export function jwt() {
+    let token = localStorage.getItem(ID_TOKEN_KEY);
+    return {
+        headers: { 'Authorization': `JWT ${token}` }
+    };
 }
 
 function getTokenExpirationDate(encodedToken) {
