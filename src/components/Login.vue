@@ -1,9 +1,16 @@
 <template>
   <div class="hello">
-    <h1>{{ formError }}</h1>
-    <input type="email" v-model="email">
-    <input type="password" v-model="password">
-    <button v-on:click="handleLogin()">Submit</button>
+    <form>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" v-model="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" v-model="password">
+      </div>
+      <button type="submit" v-on:click="handleLogin()">Submit</button>
+    </form>
   </div>
 </template>
 
@@ -31,4 +38,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
+@import '../styles/_variables'
+
+label
+  color: $gray
 </style>

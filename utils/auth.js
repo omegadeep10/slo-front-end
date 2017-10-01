@@ -16,13 +16,16 @@ export function login(email, password) {
         password: password
     };
 
+    axios.get(BASE_URL).then(res => console.log(res));
+
     return new Promise((resolve, reject) => {
         axios.post(url, credentials)
             .then(response => {
                 localStorage.setItem(ID_TOKEN_KEY, response.data[ID_TOKEN_KEY]);
                 resolve(response.data[ID_TOKEN_KEY]);
             })
-            .catch(error => {
+            .catch((err) => {
+                console.log(err);
                 reject("Invalid credentials");
             });
     });
