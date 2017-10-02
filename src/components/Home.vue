@@ -5,7 +5,7 @@
     <p class="subtext">Please select one of your incomplete assessments or add a new one.</p>
     <div class="courses">
         <h3>Your Assessments</h3>
-        <router-link v-on:click="deleteCourse(course.crn)" class="course" v-for="course in courses" :key="course.crn" tag="div" :to="`/assessment/${course.crn}`">
+        <div v-on:click="deleteCourse(course.crn)" class="course" v-for="course in courses" :key="course.crn">
             <div class="course-info">
                 <h4>{{ course.course_name }}</h4>
                 <p><span>{{ course.crn }} - </span>{{ course.semester }} {{ course.course_year }}</p>
@@ -14,7 +14,7 @@
                 <p class="completed">00/00</p>
                 <span>Assessments Completed</span>
             </div>
-        </router-link>
+        </div>
         <router-link to="/new" class="add-new">Add New Assessment</router-link>
     </div>
   </div>
@@ -43,9 +43,10 @@ export default {
           .catch(err => { console.log(err) });
       },
       deleteCourse(crn) {
-          deleteCourse(crn)
+        deleteCourse(crn)
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
+        location.reload();
       }
   },
   mounted() {
