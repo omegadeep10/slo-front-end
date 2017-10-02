@@ -3,7 +3,7 @@
     <div class="v-center-container">
       <div class="header">
         <img class="logo" src="../assets/mga_logo.jpg" alt="Middle Georgia State University Logo">
-        <h1>MGA SLO Assessments</h1>
+        <h1>Assessments Matrix</h1>
         <p>Please sign in to continue.</p>
       </div>
 
@@ -25,7 +25,7 @@
 import { login } from '../../utils/auth';
 
 export default {
-  name: 'login',
+  name: 'Login',
   data() {
     return {
       email: '',

@@ -1,9 +1,10 @@
 <template>
   <div class="home-container">
+    <app-navigation></app-navigation>
     <h1>Welcome Scott Spangler. Let's Assess Your Students.</h1>
-    <p class="subtext">Please select one of your incomplete classes or add a new one.</p>
+    <p class="subtext">Please select one of your incomplete assessments or add a new one.</p>
     <div class="courses">
-        <h3>Your Classes</h3>
+        <h3>Your Assessments</h3>
         <div class="course" v-for="course in courses" :key="course.crn">
             <div class="course-info">
                 <h4>{{ course.course_name }}</h4>
@@ -15,15 +16,18 @@
             </div>
         </div>
     </div>
+
+    <button class="add-new">Add New Assessment</button>
   </div>
 </template>
 
 <script>
 import { isLoggedIn } from '../../utils/auth';
-import { getCourses } from '../../utils/courses'
+import { getCourses } from '../../utils/courses';
+import AppNavigation from './AppNavigation.vue';
 
 export default {
-  name: 'hello',
+  name: 'Home',
   data() {
     return {
       courses: []
@@ -42,6 +46,9 @@ export default {
   },
   mounted() {
       this.getCourses();
+  },
+  components: {
+      'app-navigation': AppNavigation
   }
 };
 </script>
@@ -52,7 +59,6 @@ export default {
 
 .home-container
     text-align: center
-    padding-top: 100px
     height: 100vh
     background-color: #f1f1f1
 
@@ -63,6 +69,7 @@ h1
     font-weight: bold
     color: #333
     font-size: 26px
+    margin-top: 100px
 
 .subtext
     text-align: center
@@ -137,6 +144,5 @@ h1
             color: #ababab
             display: inline-block
             margin-top: 5px
-
 
 </style>

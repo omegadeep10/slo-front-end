@@ -20,5 +20,5 @@ export default new Router({
       component: Login,
     }
   ],
-  //mode: "history" # If enabled, makes prettier urls but breaks webpack hot reloading (Firefox bug). Enable in prod
+  //mode: "history"
 });

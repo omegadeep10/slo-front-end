@@ -16,8 +16,6 @@ export function login(email, password) {
         password: password
     };
 
-    axios.get(BASE_URL).then(res => console.log(res));
-
     return new Promise((resolve, reject) => {
         axios.post(url, credentials)
             .then(response => {
@@ -38,6 +36,7 @@ export function logout() {
 }
 
 export function requireAuth(to, from, next) {
+    console.log("Called");
     if (!isLoggedIn()) {
         next({
             path: '/login',
