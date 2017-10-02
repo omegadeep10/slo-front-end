@@ -5,27 +5,27 @@
             <router-link tag="div" to="/" class="close">
                 ✖
             </router-link><!--
-            --><div class="section-nav active">
+            --><div v-on:click="goToSection(1)" v-bind:class="[currentSection == 1 ? 'active' : '', 'section-nav']">
                 <h3>Course Data</h3>
                 <p>Add course details</p>
             </div><!--
-            --><div class="section-nav">
+            --><div v-on:click="goToSection(2)" v-bind:class="[currentSection == 2 ? 'active' : '', 'section-nav']">
                 <h3>Add Students</h3>
                 <p>Assign Students</p>
             </div><!--
-            --><div class="section-nav">
+            --><div v-on:click="goToSection(3)" v-bind:class="[currentSection == 3 ? 'active' : '', 'section-nav']">
                 <h3>Assessments</h3>
                 <p>Assess Students</p>
             </div>
             </div>
 
-            <div class="status">
+            <div class="status" v-on:click="goToSection(currentSection + 1)">
                 <p>Next is Step 1 of 3</p>
                 <h2>ADD STUDENTS</h2>
             </div>
         </nav>
         
-        <section class="one">
+        <section v-if="currentSection == 1" class="one">
             <header>
                 <div class="header-container">
                     <h1>Add a New Course</h1>
@@ -72,6 +72,32 @@
                 <button type="submit">Submit</button>
             </form>
         </section>
+
+        <section v-if="currentSection == 2" class="two">
+            <header>
+                <div class="header-container">
+                    <h1>Add Students</h1>
+                    <p>Enter each student that is in your class. Your data is automatically saved as you type.</p>
+                </div>
+            </header>
+
+            <form v-on:submit.prevent="createCourse()" class="new-course">
+                <p>Not implemented yet</p>
+            </form>
+        </section>
+
+        <section v-if="currentSection == 3" class="three">
+            <header>
+                <div class="header-container">
+                    <h1>Assess Your Students</h1>
+                    <p>For each student and each selected SLO, complete an assessment.</p>
+                </div>
+            </header>
+
+            <form v-on:submit.prevent="createCourse()" class="new-course">
+                <p>Not implemented yet</p>
+            </form>
+        </section>
   </div>
 </template>
 
@@ -84,6 +110,7 @@ export default {
   name: 'NewAssessment',
   data() {
     return {
+      currentSection: 1,
       course: {
         'crn': '',
         'faculty_id': '',
@@ -125,6 +152,11 @@ export default {
           .catch(err => {
             console.log(err);
           });
+      },
+      goToSection(section) {
+          if (section <= 3) {
+              this.currentSection = section;
+          }
       }
   },
   mounted() {
