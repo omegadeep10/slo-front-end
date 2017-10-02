@@ -5,25 +5,24 @@
     <p class="subtext">Please select one of your incomplete assessments or add a new one.</p>
     <div class="courses">
         <h3>Your Assessments</h3>
-        <div class="course" v-for="course in courses" :key="course.crn">
+        <router-link v-on:click="deleteCourse(course.crn)" class="course" v-for="course in courses" :key="course.crn" tag="div" :to="`/assessment/${course.crn}`">
             <div class="course-info">
                 <h4>{{ course.course_name }}</h4>
                 <p><span>{{ course.crn }} - </span>{{ course.semester }} {{ course.course_year }}</p>
             </div>
             <div class="assessment-info">
-                <p class="completed">12/46</p>
+                <p class="completed">00/00</p>
                 <span>Assessments Completed</span>
             </div>
-        </div>
+        </router-link>
+        <router-link to="/new" class="add-new">Add New Assessment</router-link>
     </div>
-
-    <button class="add-new">Add New Assessment</button>
   </div>
 </template>
 
 <script>
 import { isLoggedIn } from '../../utils/auth';
-import { getCourses } from '../../utils/courses';
+import { getCourses, deleteCourse } from '../../utils/courses';
 import AppNavigation from './AppNavigation.vue';
 
 export default {
@@ -42,6 +41,11 @@ export default {
               this.courses = res.data;
           })
           .catch(err => { console.log(err) });
+      },
+      deleteCourse(crn) {
+          deleteCourse(crn)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
       }
   },
   mounted() {
@@ -83,6 +87,7 @@ h1
     padding: 20px 30px
     max-width: 900px
     margin: 100px auto 0 auto
+    text-align: left
 
     h3
         font-family: "Roboto"
@@ -144,5 +149,23 @@ h1
             color: #ababab
             display: inline-block
             margin-top: 5px
+
+.add-new
+    font-family: "Roboto"
+    font-size: 16px
+    font-weight: 500
+    padding: 15px 20px
+    color: #444
+    border: 2px solid #444
+    background-color: white
+    display: inline-block
+    text-align: left
+    text-decoration: none
+    margin-top: 20px
+
+    &:hover
+        color: $mga-primary
+        border: 2px solid $mga-primary
+        cursor: pointer
 
 </style>
