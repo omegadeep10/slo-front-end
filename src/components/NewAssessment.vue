@@ -20,8 +20,12 @@
             </div>
 
             <div class="status" v-on:click="goToSection(currentSection + 1)">
-                <p>Next is Step 1 of 3</p>
-                <h2>ADD STUDENTS</h2>
+                <p>Next is Step {{ currentSection }} of 3</p>
+                <h2>
+                    {{ currentSection == 1 ? 'Add Students' : '' }}
+                    {{ currentSection == 2 ? 'Assessments' : '' }}
+                    {{ currentSection == 3 ? 'Submit Data' : '' }}
+                </h2>
             </div>
         </nav>
         
@@ -239,6 +243,8 @@ nav
     background-color: $mga-primary
     padding: 0 40px
     padding-top: 50px
+    width: 230px
+    user-select: none
 
     &:hover
         cursor: pointer
