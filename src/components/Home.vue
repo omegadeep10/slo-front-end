@@ -3,6 +3,7 @@
     <app-navigation></app-navigation>
     <h1>Welcome Scott Spangler. Let's Assess Your Students.</h1>
     <p class="subtext">Please select one of your incomplete assessments or add a new one.</p>
+    <p v-if="courses.length == 0">Please create a new course.</p>
     <div class="courses">
         <h3>Your Assessments</h3>
         <div v-on:click="deleteCourse(course.crn)" class="course" v-for="course in courses" :key="course.crn">
